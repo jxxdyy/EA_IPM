@@ -7,8 +7,8 @@
 ## Examples
 
 
-#### example 1 : Speed bump (Upward direction)
+### example 1 : Speed bump (Upward direction)
 
 
 
-#### example 2 : Speed bump (Downward direction)
+### example 2 : Speed bump (Downward direction)
