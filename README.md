@@ -7,7 +7,7 @@
 ## Examples
 
 
-#### example 1 : Speed bump (Upward direction)
+### example 1 : Speed bump (Upward direction)
 
 
 
@@ -15,4 +15,4 @@
 
 
 
-##### example 3 : Sidewalk
+### example 3 : Sidewalk
