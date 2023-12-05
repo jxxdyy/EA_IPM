@@ -6,14 +6,14 @@
 #include "IPMManager.h"
 
 
-void set_path(std::vector<std::string> &vImage_path,
+void setPath(std::vector<std::string> &vImage_path,
               std::vector<std::vector<double>> &vImuRPY);
-void test_image();
+void testImage();
 
 
 //! Path setting
-const std::string input = "sample1.png";
-const std::string input_imu = "sample1_imu.txt";
+const std::string input = "sample2.png";
+const std::string input_imu = "sample2_imu.txt";
 
 //* image path setting
 // image
@@ -37,11 +37,11 @@ std::vector<std::vector<double>> vOdomRPY, vImuRPY;
 
 int main()
 {   
-    set_path(vImage_path, vImuRPY);
+    setPath(vImage_path, vImuRPY);
 
     //* BEV image test
     if (test_mode == true)
-        test_image();
+        testImage();
 
 
     IPMManager IPM;
@@ -65,14 +65,14 @@ int main()
         std::cout << std::endl;
 
 
-        IPM.IPM_process(image, pose, Normal);
-        cv::Mat BEV_image_normal = IPM.get_BEV_image().clone();
+        IPM.IPMProcess(image, pose, Normal);
+        cv::Mat BEV_image_normal = IPM.getBEVImage().clone();
 
-        IPM.IPM_process(image, pose, Adaptive);
-        cv::Mat BEV_image_adaptive = IPM.get_BEV_image().clone();
+        IPM.IPMProcess(image, pose, Adaptive);
+        cv::Mat BEV_image_adaptive = IPM.getBEVImage().clone();
 
-        IPM.IPM_process(image, pose, Extended);
-        cv::Mat BEV_image_extended = IPM.get_BEV_image().clone();
+        IPM.IPMProcess(image, pose, Extended);
+        cv::Mat BEV_image_extended = IPM.getBEVImage().clone();
 
         if (is_show == true)
         {
@@ -100,7 +100,7 @@ int main()
 
 
 
-void set_path(std::vector<std::string> &vImage_path,
+void setPath(std::vector<std::string> &vImage_path,
               std::vector<std::vector<double>> &vImuRPY)
 {
     // read imu
@@ -130,7 +130,7 @@ void set_path(std::vector<std::string> &vImage_path,
 
 
 //! If you want to check the results of single image.
-void test_image()
+void testImage()
 {
     cv::Mat image = cv::imread(data_root, cv::IMREAD_UNCHANGED);
     bool mode = Normal;
@@ -143,9 +143,9 @@ void test_image()
     test_pose[1] = -test_pose[1];
 
 
-    test_IPM.IPM_process(image, test_pose, Normal);
+    test_IPM.IPMProcess(image, test_pose, Normal);
 
-    cv::Mat test_BEV_image = test_IPM.get_BEV_image();
+    cv::Mat test_BEV_image = test_IPM.getBEVImage();
 
     cv::namedWindow("image", 0);
     cv::resizeWindow("image", image.rows/1.5, image.cols/1.5);

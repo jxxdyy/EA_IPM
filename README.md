@@ -11,7 +11,7 @@
 
 
 
-### example 2 : Speed bump (Downward direction)
+### example 2 : Hallway
 
 
 

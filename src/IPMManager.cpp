@@ -5,7 +5,7 @@
 
 
 
-void IPMManager::IPM_process(cv::Mat &image, std::vector<double> &pose, Mode mode)
+void IPMManager::IPMProcess(cv::Mat &image, std::vector<double> &pose, Mode mode)
 {
     front_image_ = image;
 
@@ -40,7 +40,7 @@ void IPMManager::IPM_process(cv::Mat &image, std::vector<double> &pose, Mode mod
 
 
     // get BEV image
-    IPM_backward(mode);
+    IPMBackward(mode);
 }
 
 
@@ -65,7 +65,7 @@ void IPMManager::quat2euler(Eigen::Quaterniond &quat, Eigen::Vector3d &euler)
 
 
 
-void IPMManager::roll_compensation(float &c, float &r, float theta_r)
+void IPMManager::rollCompensation(float &c, float &r, float theta_r)
 {
     Eigen::Matrix2f rot;
     Eigen::MatrixXf cr(1, 2), rot_cr(1, 2);
@@ -81,7 +81,7 @@ void IPMManager::roll_compensation(float &c, float &r, float theta_r)
 
 
 
-void IPMManager::IPM_backward(Mode mode)
+void IPMManager::IPMBackward(Mode mode)
 {   
     const int img_w = 480;
     const int img_h = 640;
@@ -139,7 +139,7 @@ void IPMManager::IPM_backward(Mode mode)
             
             //! Extended and Adaptive mode (roll compensation)
             if (mode == Extended)
-                roll_compensation(c, r, -theta_r);
+                rollCompensation(c, r, -theta_r);
             
             auto c2u = [this](float c) {return CX_ + 0.5 + c;};
             auto r2v = [this](float r) {return CY_ + 0.5 - r;};

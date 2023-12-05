@@ -23,30 +23,30 @@ enum Mode {
 
 class IPMManager
 {
-    //! sample 1 & 2 ----------------------------------------------------
-    const float FX_ = 479.619; 
-    const float FY_ = 479.96602;
-    const float CX_ = 840.60503;
-    const float CY_ = 610.61653;
-    const float CAM_HEIGHT_ = 0.735;
-    const float VIR_CAM_X_ = 3.5;
-    const float VIR_CAM_Z_ = 4.3;         // + : left, - : right
-    const float VIR_CAM_Y_ = 0.0; 
-    const float theta0_ = 0.0*M_PI/180;
-    const float init_roll_ = 0.0*M_PI/180;
-
-
-    //! sample 3 ----------------------------------------------------
-    // const float FX_ = 1318.93;
-    // const float FY_ = 1320.25;
-    // const float CX_ = 1337.66;
-    // const float CY_ = 1004.15;
-    // const float CAM_HEIGHT_ = 0.561;
-    // const float VIR_CAM_X_ = 3.0;
-    // const float VIR_CAM_Y_ = 0.0;            // + : left, - : right
-    // const float VIR_CAM_Z_ = 3.0;
+    //! sample 1 ----------------------------------------------------
+    // const float FX_ = 479.619; 
+    // const float FY_ = 479.96602;
+    // const float CX_ = 840.60503;
+    // const float CY_ = 610.61653;
+    // const float CAM_HEIGHT_ = 0.735;
+    // const float VIR_CAM_X_ = 3.5;
+    // const float VIR_CAM_Z_ = 4.3;         // + : left, - : right
+    // const float VIR_CAM_Y_ = 0.0; 
     // const float theta0_ = 0.0*M_PI/180;
     // const float init_roll_ = 0.0*M_PI/180;
+
+
+    //! sample 2 & 3 ----------------------------------------------------
+    const float FX_ = 1318.93;
+    const float FY_ = 1320.25;
+    const float CX_ = 1337.66;
+    const float CY_ = 1004.15;
+    const float CAM_HEIGHT_ = 0.561;
+    const float VIR_CAM_X_ = 3.0;
+    const float VIR_CAM_Y_ = 0.0;            // + : left, - : right
+    const float VIR_CAM_Z_ = 3.0;
+    const float theta0_ = 0.0*M_PI/180;
+    const float init_roll_ = 0.0*M_PI/180;
 
     double roll_;
     double pitch_;
@@ -58,15 +58,15 @@ public:
     IPMManager() : roll_(0.0), pitch_(0.0) {};
     ~IPMManager() {};
 
-    void IPM_process(cv::Mat &image, std::vector<double> &pose, Mode mode);
+    void IPMProcess(cv::Mat &image, std::vector<double> &pose, Mode mode);
 
     void quat2euler(Eigen::Quaterniond &quaternion, Eigen::Vector3d &euler);
 
-    void roll_compensation(float &c, float &r, float theta_r);
+    void rollCompensation(float &c, float &r, float theta_r);
 
-    void IPM_backward(Mode mode);
+    void IPMBackward(Mode mode);
 
-    cv::Mat get_BEV_image() {  return BEV_image_;  };
+    cv::Mat getBEVImage() {  return BEV_image_;  };
 };
 
 
